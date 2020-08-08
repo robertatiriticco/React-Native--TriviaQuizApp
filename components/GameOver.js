@@ -1,15 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, Button } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import CustomButton from './CustomButton'
 
 export default function GameOver({ score, playAgain }) {
 
   return (
     <View style={styles.container}>
-      <Text>GAME OVER!</Text>
-      <Text>Your score is:</Text>
-      <Text>{score}</Text>
-      <Button onPress={() => playAgain()} title="Play again!"/>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>GAME OVER!</Text>
+        <Text style={styles.text}>Your score is:</Text>
+        <Text style={styles.text}>{score}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+      <CustomButton onPress={playAgain} text="Play again!" />
+      </View>
     </View>
   );
 }
@@ -17,8 +21,21 @@ export default function GameOver({ score, playAgain }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  textContainer: {
+    flex: 2,
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: "#fff",
+    fontSize: 25,
+    fontWeight: "bold"
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });

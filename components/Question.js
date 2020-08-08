@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, FlatList, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Animated, Easing } from 'react-native';
+import CustomButton from './CustomButton'
 
 export default function Question({ question, correctAnswer, choices, questionNumber, totQuestions, handleAnswers, nextQuestion }) {
 
@@ -16,11 +17,10 @@ export default function Question({ question, correctAnswer, choices, questionNum
   return (
     <View style={styles.container}>
       <View style={styles.questionNumber}>
-        <Text>Question</Text>
-        <Text>{questionNumber + 1}/{totQuestions}</Text>
+        <Text style={styles.questionNumberText}>Question {questionNumber + 1}/{totQuestions}</Text>
       </View>
       <View style={styles.question}>
-        <Text>{question}</Text>
+        <Text style={styles.questionText}>{question}</Text>
       </View>
       <View style={styles.choices}>
         {choices.map((choice, index) => {
@@ -43,8 +43,8 @@ export default function Question({ question, correctAnswer, choices, questionNum
           )
         })}
       </View>
-      <View style={styles.button}>
-        <Button title="Continue" onPress={() => nextQuestion()} />
+      <View style={styles.buttonContainer}>
+        <CustomButton onPress={nextQuestion} text="Next" />
       </View>
     </View>
   );
@@ -53,18 +53,29 @@ export default function Question({ question, correctAnswer, choices, questionNum
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
+    marginTop: 40,
   },
   questionNumber: {
-    flex: 1,
+    margin: 20,
     alignItems: "center",
     justifyContent: "center"
   },
+  questionNumberText: {
+    color: "#9eb3c2",
+    fontSize: 12,
+    fontWeight: "bold",
+    textTransform: "uppercase"
+  },
   question: {
     flex: 1,
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    borderColor: "#1c7293",
+    borderWidth: 2,
+    backgroundColor: "#21295c",
+    borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -72,17 +83,21 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 1.41,
-
     elevation: 2,
-    maxWidth: "95%",
-    padding: 5,
+    minWidth: "90%",
+    maxWidth: "90%",
+    padding: 20,
     marginTop: 15,
     marginBottom: 15
   },
+  questionText: {
+    color: "#fff",
+    fontSize: 16,
+    lineHeight: 24
+  },
   choices: {
-    flex: 6,
+    flex: 3,
     flexDirection: "column",
-    backgroundColor: '#fff',
     alignItems: 'center',
     flexWrap: "wrap",
     justifyContent: "center"
@@ -95,14 +110,20 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.32,
     shadowRadius: 5.46,
-
     elevation: 9,
     alignSelf: "center",
-    width: 300,
-    maxWidth: "80%",
+    minWidth: "90%",
+    maxWidth: "90%",
     backgroundColor: '#090c34',
-    padding: 10,
-    marginBottom: 10
+    borderColor: "#1c7293",
+    borderWidth: 2,
+    backgroundColor: "#21295c",
+    borderRadius: 20,
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginBottom: 15
   },
   rightChoice: {
     backgroundColor: '#33ca7f'
@@ -114,8 +135,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "#fff",
   },
-  button: {
-    flex: 3,
-    margin: 5,
-  }
+  buttonContainer: {
+    flex: 1,
+  },
 });

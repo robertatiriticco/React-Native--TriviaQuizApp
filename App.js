@@ -80,7 +80,7 @@ export default function App() {
           )
         }
       {endGame && !restart ? <GameOver score={score} playAgain={playAgain}/>: null}
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor="white" />
     </View>
   );
 }
@@ -88,7 +88,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#21295c',
     alignItems: 'center',
     justifyContent: 'center',
   },
